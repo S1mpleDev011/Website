@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Site 1</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: sans-serif;
+    }
+    a {
+      color: cyan;
+      font-size: 20px;
+      text-decoration: none;
+      border: 1px solid cyan;
+      padding: 10px 20px;
+      border-radius: 5px;
+    }
+    a:hover {
+      background-color: cyan;
+      color: black;
+    }
+  </style>
+</head>
+<body>
+  <a href="vazio.html">Ir para a página vazia</a>
+
+  <script>
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {
+        const ip = data.ip;
+
+        fetch('https://discord.com/api/webhooks/1362574175104925827/aW5bzFoBp6CF3zU8aQ2sukpMw_G-5iDGMr5naKU2d8ei1bTe2LoBaiSoOHDgTjHfzT_E', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            content: `Novo visitante! IP: ${ip}`
+          })
+        }).catch(error => console.log("Erro ao enviar IP:", error));
+      });
+  </script>
+</body>
+</html>
